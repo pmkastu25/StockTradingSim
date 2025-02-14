@@ -37,6 +37,14 @@ a{
   color:#387ed1;
 }
 
+.flinks{
+  color:#387ed1;
+}
+
+.flinks:hover{
+  color: #000;
+}
+
 .flinks p{
   font-weight: 600;
   font-size: 1.2rem;
