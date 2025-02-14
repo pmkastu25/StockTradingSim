@@ -11,3 +11,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nav-link{
+    margin-left: 40px;
+}
+
+a{
+  text-decoration: none;
+}
+
+.footer-graveeyard-links ul li{
+  display: inline;
+  margin-right: 20px;
+  line-height: 3;
+}
+
+
+.flinks a{
+  color:grey;
+  font-weight: 500;
+  line-height: 2;
+}
+
+.flinks a:hover{
+  color:#387ed1;
+}
+
+.flinks p{
+  font-weight: 600;
+  font-size: 1.2rem;
+}
