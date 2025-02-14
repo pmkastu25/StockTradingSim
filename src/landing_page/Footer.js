@@ -122,7 +122,7 @@ function Footer() {
             <a href="">create a ticket here</a>.
           </p>
         </div>
-        <div className="footer-graveeyard-links mb-4" style={{ fontSize: "0.80rem", textAlign:"center"}}>
+        <div className="footer-graveeyard-links" style={{ fontSize: "0.80rem", textAlign:"center"}}>
             <ul  style={{ listStyleType:"none",  display:"block" }}>
             <li className="col"><a href="">NSE</a></li>
             <li className="col"><a href="">BSE </a></li>
