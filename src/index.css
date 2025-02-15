@@ -55,3 +55,40 @@ a{
   height: 65px;
 }
 
+#supportHero{
+  background-color: #387ed1;
+  color: white;
+  padding: 0 180px;
+  padding-bottom: 50px;
+}
+
+#supportHero a{
+  text-decoration: underline;
+  color: white;
+  line-height: 3;
+  font-size: 1.2em;
+}
+
+
+#supportWrapper{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 50px;
+}
+
+.inner a{
+  margin-right: 1rem;
+}
+
+#supportHero input{
+  padding: 15px 50px;
+  width: 100%;
+  font-size: 20px;
+  border-radius: 3px;
+  border: none;
+}
+
+.outer{
+  display: flex;
+  align-items: center;
+}
