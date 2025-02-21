@@ -8,14 +8,17 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const {PositionsModel} = require('./model/PositionsModel')
+const {OrdersModel} = require('../backend/model/OrdersModel')
+const {UsersModel} = require("../backend/model/UsersModel")
 
 const PORT = process.env.PORT || 3005;
 const url = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(cors())
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 
 // app.get("/addHoldings", (req, res)=>{
 //     let tempHoldings = [
@@ -202,8 +205,39 @@ app.get('/allPositions', async(req, res)=>{
 })
 
 app.post("/newOrder", async(req, res)=>{
-    
+    let newOrder = new OrdersModel({
+        name: req.body.name,
+        qty: req.body.qty,
+        price: req.body.price,
+        mode: req.body.mode,
+    });
+
+    newOrder.save();
+    res.send("Order Saved");
 })
+
+app.post("/signup",async(req, res)=>{
+    console.log(req.body);
+    let newUser = new UsersModel({
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+    });
+
+    await newUser.save();
+    res.send("NewUser Created");
+})
+
+app.post("/login",async (req, res)=>{
+    console.log(req.body);
+
+    let User = await UsersModel.find({$and:[{username: req.body.username},{password: req.body.password}]});
+
+    if(User){
+        console.log("User Exists");
+    }
+})
+
 
 app.listen(PORT,()=>{
     console.log("App Started");
