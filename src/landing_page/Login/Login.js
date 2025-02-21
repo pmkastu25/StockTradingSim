@@ -3,15 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-function Signup() {
+function Login() {
   const navigate = useNavigate();
   const [inputVal, setInputVal] = useState({
-    email: "",
     username: "",
     password: "",
   });
 
-  const { email, username, password } = inputVal;
+  const { username, password } = inputVal;
 
   const handleOnChange = (e) => {
     setInputVal({
@@ -33,7 +32,7 @@ function Signup() {
     e.preventDefault();
     // try {
         await axios.post(
-        "http://localhost:3005/signup",
+        "http://localhost:3005/login",
          inputVal ,
         {
           headers: { "Content-Type": "application/json" },
@@ -56,7 +55,6 @@ function Signup() {
 
     setInputVal({
       ...inputVal,
-      email: "",
       username: "",
       password: "",
     });
@@ -66,16 +64,6 @@ function Signup() {
     <div className="container">
       <div className="row">
         <form onSubmit={handleSubmit} method="POST">
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              placeholder="Enter Email"
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleOnChange}
-            ></input>
-          </div>
           <div>
             <label htmlFor="username">Username</label>
             <input
@@ -98,7 +86,7 @@ function Signup() {
           </div>
           <button type="submit">Submit</button>
           <span>
-            Already have an account? <Link to={"/login"}>Login</Link>
+            Don't have a account? <Link to={"/signup"}>Signup</Link>
           </span>
         </form>
         <ToastContainer />
@@ -107,4 +95,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Login;
