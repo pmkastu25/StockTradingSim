@@ -15,51 +15,51 @@ function Footer() {
           </div>
           <div className="col flinks">
             <p>Company</p>
-            <a href="">About</a>
+            <a href="https://example.com">About</a>
             <br />
-            <a href="">Products</a>
+            <a href="https://example.com">Products</a>
             <br />
-            <a href="">Pricing</a>
+            <a href="https://example.com">Pricing</a>
             <br />
-            <a href="">Referral programme</a>
+            <a href="https://example.com">Referral programme</a>
             <br />
-            <a href="">Careers</a>
+            <a href="https://example.com">Careers</a>
             <br />
-            <a href="">Zerodha.tech</a>
+            <a href="https://example.com">Zerodha.tech</a>
             <br />
-            <a href="">Open source</a>
+            <a href="https://example.com">Open source</a>
             <br />
-            <a href="">Press & media</a>
+            <a href="https://example.com">Press & media</a>
             <br />
-            <a href="">Zerodha Cares (CSR)</a>
+            <a href="https://example.com">Zerodha Cares (CSR)</a>
             <br />
           </div>
           <div className="col flinks">
             <p>Support</p>
-            <a href="">Contact us</a>
+            <a href="https://example.com">Contact us</a>
             <br />
-            <a href="">Support portal</a>
+            <a href="https://example.com">Support portal</a>
             <br />
-            <a href="">Z-Connect blog</a>
+            <a href="https://example.com">Z-Connect blog</a>
             <br />
-            <a href="">List of charges</a>
+            <a href="https://example.com">List of charges</a>
             <br />
-            <a href="">Downloads & resources</a>
+            <a href="https://example.com">Downloads & resources</a>
             <br />
-            <a href="">Videos</a>
+            <a href="https://example.com">Videos</a>
             <br />
-            <a href="">Market overview</a>
+            <a href="https://example.com">Market overview</a>
             <br />
-            <a href="">How to file a complaint?</a>
+            <a href="https://example.com">How to file a complaint?</a>
             <br />
-            <a href="">Status of your complaints</a>
+            <a href="https://example.com">Status of your complaints</a>
             <br />
           </div>
           <div className="col flinks">
             <p>Account</p>
-            <a href="">Open an account</a>
+            <a href="https://example.com">Open an account</a>
             <br />
-            <a href="">Fund transfer</a>
+            <a href="https://example.com">Fund transfer</a>
             <br />
           </div>
         </div>
@@ -76,19 +76,19 @@ function Footer() {
             Broking Ltd., #153/154, 4th Cross, Dollars Colony, Opp. Clarence
             Public School, J.P Nagar 4th Phase, Bengaluru - 560078, Karnataka,
             India. For any complaints pertaining to securities broking please
-            write to <a href="">complaints@zerodha.com</a>, for DP related to{" "}
-            <a href="">dp@zerodha.com</a>. Please ensure you carefully read the
+            write to <a href="https://example.com">complaints@zerodha.com</a>, for DP related to{" "}
+            <a href="https://example.com">dp@zerodha.com</a>. Please ensure you carefully read the
             Risk Disclosure Document as prescribed by SEBI | ICF
           </p>
           <p>
-            Procedure to file a complaint on <a href="">SEBI SCORES</a>:
+            Procedure to file a complaint on <a href="https://example.com">SEBI SCORES</a>:
             Register on SCORES portal. Mandatory details for filing complaints
             on SCORES: Name, PAN, Address, Mobile Number, E-mail ID. Benefits:
             Effective Communication, Speedy redressal of the grievances
           </p>
           <p>
-            <a href="">Smart Online Dispute Resolution</a> |{" "}
-            <a href="">Grievances Redressal Mechanism</a>
+            <a href="https://example.com">Smart Online Dispute Resolution</a> |{" "}
+            <a href="https://example.com">Grievances Redressal Mechanism</a>
           </p>
           <p>
             Investments in securities market are subject to market risks; read
@@ -119,20 +119,20 @@ function Footer() {
             bank account. As a business we don't give stock tips, and have not
             authorized anyone to trade on behalf of others. If you find anyone
             claiming to be part of Zerodha and offering such services, please{" "}
-            <a href="">create a ticket here</a>.
+            <a href="https://example.com">create a ticket here</a>.
           </p>
         </div>
         <div className="footer-graveeyard-links" style={{ fontSize: "0.80rem", textAlign:"center"}}>
             <ul  style={{ listStyleType:"none",  display:"block" }}>
-            <li className="col"><a href="">NSE</a></li>
-            <li className="col"><a href="">BSE </a></li>
-            <li className="col"><a href="">MCX</a></li>
-            <li className="col "><a href="" >Terms & conditions</a></li>
-            <li className="col"><a href="">Policies & procedures</a></li>
-            <li className="col"><a href="">Privacy policy</a></li>
-            <li className="col"><a href="">Disclosure</a></li>
-            <li className="col"><a href="">For investor's attenton</a></li>
-            <li className="col-sm-12"><a href="">Investor charter</a></li>
+            <li className="col"><a href="https://example.com">NSE</a></li>
+            <li className="col"><a href="https://example.com">BSE </a></li>
+            <li className="col"><a href="https://example.com">MCX</a></li>
+            <li className="col "><a href="https://example.com" >Terms & conditions</a></li>
+            <li className="col"><a href="https://example.com">Policies & procedures</a></li>
+            <li className="col"><a href="https://example.com">Privacy policy</a></li>
+            <li className="col"><a href="https://example.com">Disclosure</a></li>
+            <li className="col"><a href="https://example.com">For investor's attenton</a></li>
+            <li className="col-sm-12"><a href="https://example.com">Investor charter</a></li>
             </ul>
         </div>
       </div>
