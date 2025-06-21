@@ -35,3 +35,6 @@ root.render(
   </BrowserRouter>
 );
 
+
+//localhost:3005 - backend
+//frontend:3000 or 3001
