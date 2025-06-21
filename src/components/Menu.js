@@ -6,6 +6,12 @@ const Menu = () => {
 
   const [isProfiledropdownOpen, setisProfiledropdownOpen] = useState(false);
 
+  // useEffect(() => {
+  //   axios.get("http://localhost:3005/allUsers").then((res) => {
+  //     console.log(res.data);
+  //   }, []);
+  // });
+
   const handleMenuCLick = (index) => {
     setSelectedMenu(index);
   };
