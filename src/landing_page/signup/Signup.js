@@ -2,103 +2,95 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [inputVal, setInputVal] = useState({
     email: "",
     username: "",
     password: "",
   });
 
-  const { email, username, password } = inputVal;
-
   const handleOnChange = (e) => {
-    setInputVal({
-      ...inputVal,
-      [e.target.name]: e.target.value,
-    });
+    setInputVal({ ...inputVal, [e.target.name]: e.target.value });
   };
-
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-right",
-    });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-        await axios.post(
-        "http://localhost:3005/signup",
-         inputVal ,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+    setLoading(true); // Disable form while processing
 
-    //   const { success, message } = data;
-    //   if (success) {
-    //     handleSuccess(message);
-    //     setTimeout(() => {
-    //       navigate("/");
-    //     }, 1000);
-    //   } else {
-    //     handleError(message);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const response = await axios.post("http://localhost:3005/signup", inputVal, {
+        // headers: { "Content-Type": "application/json" },
+        withCredentials: true, 
+      });
 
-    setInputVal({
-      ...inputVal,
-      email: "",
-      username: "",
-      password: "",
-    });
+      toast.success("Signup Successful! Redirecting...", { autoClose: 2000 });
+      setTimeout(() => navigate("/"), 2000); // Redirect after 2 sec
+
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 400) {
+        toast.error("User already exists!");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+      setInputVal({ email: "", username: "", password: "" }); // Clear inputs
+    }
   };
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="row mt-3">
         <form onSubmit={handleSubmit} method="POST">
           <div>
             <label htmlFor="email">Email</label>
             <input
+              className="form-control mt-2 mb-2"
               placeholder="Enter Email"
               type="email"
               name="email"
-              value={email}
+              value={inputVal.email}
               onChange={handleOnChange}
-            ></input>
+              required
+              disabled={loading}
+            />
           </div>
           <div>
             <label htmlFor="username">Username</label>
             <input
+              className="form-control mt-2 mb-2"
               placeholder="Enter Username"
               type="text"
               name="username"
-              value={username}
+              value={inputVal.username}
               onChange={handleOnChange}
-            ></input>
+              required
+              disabled={loading}
+            />
           </div>
           <div>
             <label htmlFor="password">Password</label>
             <input
               placeholder="Enter Password"
+              className="form-control mt-2 mb-2"
               type="password"
               name="password"
-              value={password}
+              value={inputVal.password}
               onChange={handleOnChange}
-            ></input>
+              required
+              disabled={loading}
+            />
           </div>
-          <button type="submit">Submit</button>
+          <button className="btn btn-primary m-3" type="submit" disabled={loading}>
+            {loading ? "Signing up..." : "Submit"}
+          </button>
           <span>
-            Already have an account? <Link to={"/login"}>Login</Link>
+            Already have an account? <Link to="/login">Login</Link>
           </span>
         </form>
         <ToastContainer />
@@ -108,3 +100,4 @@ function Signup() {
 }
 
 export default Signup;
+

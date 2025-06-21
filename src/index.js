@@ -13,11 +13,12 @@ import Navbar from './landing_page/Navbar';
 import Footer from './landing_page/Footer';
 import NotFound from './landing_page/NotFound';
 import Login from './landing_page/Login/Login.js';
-
+import { AuthProvider } from "./context/AuthContext"; // adjust path
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
+  <AuthProvider>
     <Navbar/>
     <Routes>
       <Route path="/" element={<HomePage/>}/>
@@ -30,6 +31,7 @@ root.render(
       <Route path="/*" element={<NotFound/>}/>
     </Routes>
     <Footer/>
+    </AuthProvider>
   </BrowserRouter>
 );
 

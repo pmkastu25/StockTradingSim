@@ -1,18 +1,70 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Navbar() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  // Check auth on mount
+ useEffect(() => {
+  const checkAuth = async () => {
+    try {
+      axios.defaults.withCredentials = true;
+      const res = await axios.get("http://localhost:3005/verify", {
+        withCredentials: true,
+      });
+
+      console.log("Verify response:", res.data); // 👈 Add this
+
+      if (res.data.success) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    } catch (err) {
+      console.log("Verify failed:", err); // 👈 Add this
+      setIsAuthenticated(false);
+    }
+  };
+
+  checkAuth();
+}, []);
+
+
+  const handleLogout = async () => {
+   try {
+    await axios.get("http://localhost:3005/logout", { withCredentials: true }); // server clears cookie
+  } catch (err) {
+    console.log("Logout error (optional):", err);
+  }
+    setIsAuthenticated(false);
+    navigate("/login");
+  };
+
   return (
     <nav
-      class="navbar navbar-expand-lg border-bottom"
-      style={{ backgroundColor: "#FFF"}}
+      className="navbar navbar-expand-lg border-bottom"
+      style={{ backgroundColor: "#FFF" }}
     >
-      <div class="container">
-        <Link class="navbar-brand" to="/">
-          <img src="\media\logo.svg" alt="logo" style={{ width: "25%" }} />
+      <div className="container">
+        <Link className="navbar-brand" to="/">
+          <img src="/media/logo.svg" alt="logo" style={{ width: "25%" }} />
         </Link>
+        <div>
+          {isAuthenticated && (
+                <li className="nav-item">
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
+        </div>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -20,33 +72,35 @@ function Navbar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="d-flex" role="search">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/signup">
-                  Signup
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="/about">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <form className="d-flex" role="search">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              {!isAuthenticated && (
+                <li className="nav-item">
+                  <Link className="nav-link active" to="/signup">
+                    Signup
+                  </Link>
+                </li>
+              )}
+              <li className="nav-item">
+                <Link className="nav-link active" to="/about">
                   About
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/product">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/product">
                   Product
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="/pricing">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/pricing">
                   Pricing
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="/support">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/support">
                   Support
                 </Link>
               </li>

@@ -2,91 +2,78 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const navigate = useNavigate();
-  const [inputVal, setInputVal] = useState({
-    username: "",
-    password: "",
-  });
-
-  const { username, password } = inputVal;
+  const [loading, setLoading] = useState(false);
+  const [inputVal, setInputVal] = useState({ email: "", password: "" });
 
   const handleOnChange = (e) => {
-    setInputVal({
-      ...inputVal,
-      [e.target.name]: e.target.value,
-    });
+    setInputVal({ ...inputVal, [e.target.name]: e.target.value });
   };
-
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-right",
-    });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-        await axios.post(
-        "http://localhost:3005/login",
-         inputVal ,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+    setLoading(true); // Disable form while processing
 
-    //   const { success, message } = data;
-    //   if (success) {
-    //     handleSuccess(message);
-    //     setTimeout(() => {
-    //       navigate("/");
-    //     }, 1000);
-    //   } else {
-    //     handleError(message);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const response = await axios.post("http://localhost:3005/login", inputVal, {
+        // headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
 
-    setInputVal({
-      ...inputVal,
-      username: "",
-      password: "",
-    });
+      toast.success("Login Successful! Redirecting...", { autoClose: 2000 });
+      setTimeout(() => navigate("/"), 2000); // Redirect after 2 sec
+
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 400) {
+        toast.error("Incorrect Email or Password");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+      setInputVal({ email: "", password: "" }); // Clear inputs
+    }
   };
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="row mt-3">
         <form onSubmit={handleSubmit} method="POST">
           <div>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
-              placeholder="Enter Username"
-              type="text"
-              name="username"
-              value={username}
+              placeholder="Enter Email"
+              className="form-control mb-2 mt-2"
+              type="email"
+              name="email"
+              value={inputVal.email}
               onChange={handleOnChange}
-            ></input>
+              required
+              disabled={loading}
+            />
           </div>
           <div>
             <label htmlFor="password">Password</label>
             <input
+              className="form-control mb-2 mt-2"
               placeholder="Enter Password"
               type="password"
               name="password"
-              value={password}
+              value={inputVal.password}
               onChange={handleOnChange}
-            ></input>
+              required
+              disabled={loading}
+            />
           </div>
-          <button type="submit">Submit</button>
+          <button className="btn btn-primary m-3" type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Submit"}
+          </button>
           <span>
-            Don't have a account? <Link to={"/signup"}>Signup</Link>
+            Don't have an account? <Link to="/signup">Signup</Link>
           </span>
         </form>
         <ToastContainer />
