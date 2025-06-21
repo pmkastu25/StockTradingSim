@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin:  "*",
+  origin:  "https://grand-moxie-174ee5.netlify.app",
   credentials: true,
 }));
 
