@@ -10,8 +10,8 @@ const {HoldingsModel} = require('./model/HoldingsModel')
 const cors = require('cors')
 
 const {PositionsModel} = require('./model/PositionsModel')
-const {OrdersModel} = require('../backend/model/OrdersModel')
-const {UsersModel} = require("../backend/model/UsersModel")
+const {OrdersModel} = require('./model/OrdersModel')
+const {UsersModel} = require("./model/UsersModel")
 
 const AuthRoute = require("./routes/AuthRoute");
 const cookieParser = require("cookie-parser");
