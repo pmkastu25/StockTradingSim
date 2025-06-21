@@ -11,7 +11,7 @@ function Navbar() {
   const checkAuth = async () => {
     try {
       axios.defaults.withCredentials = true;
-      const res = await axios.get("http://localhost:3005/verify", {
+      const res = await axios.get("https://zerodha-clone-backend-2y8c.onrender.com/verify", {
         withCredentials: true,
       });
 
@@ -34,7 +34,7 @@ function Navbar() {
 
   const handleLogout = async () => {
    try {
-    await axios.get("http://localhost:3005/logout", { withCredentials: true }); // server clears cookie
+    await axios.get("https://zerodha-clone-backend-2y8c.onrender.com/logout", { withCredentials: true }); // server clears cookie
   } catch (err) {
     console.log("Logout error (optional):", err);
   }

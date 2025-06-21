@@ -18,7 +18,7 @@ function Login() {
     setLoading(true); // Disable form while processing
 
     try {
-      const response = await axios.post("http://localhost:3005/login", inputVal, {
+      const response = await axios.post("https://zerodha-clone-backend-2y8c.onrender.com/login", inputVal, {
         // headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });

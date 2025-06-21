@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const res = await axios.get("http://localhost:3005/verify", {
+      const res = await axios.get("https://zerodha-clone-backend-2y8c.onrender.com/verify", {
         withCredentials: true,
       });
       if (res.data.success) setIsAuthenticated(true);
