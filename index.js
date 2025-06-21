@@ -2,23 +2,66 @@ require('dotenv').config();
 
 const express = require("express");
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')
+
 const {HoldingsModel} = require('./model/HoldingsModel')
 
-const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const {PositionsModel} = require('./model/PositionsModel')
 const {OrdersModel} = require('../backend/model/OrdersModel')
 const {UsersModel} = require("../backend/model/UsersModel")
 
-const PORT = process.env.PORT || 3005;
+const AuthRoute = require("./routes/AuthRoute");
+const cookieParser = require("cookie-parser");
+
+const PORT = 3005;
 const url = process.env.MONGO_URL;
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "http://localhost:3000", credentials: true }))
+
+app.use(cors({
+  origin:  ["http://localhost:3000", "http://localhost:3001"],
+  credentials: true,
+}));
+
+const store = MongoStore.create({
+    mongoUrl: url,
+    crypto:{
+        secret : process.env.SESSION_SECRET_KEY,
+    },
+    touchAfter: 24 * 3600, //session is updated after 24hrs;
+})
+
+app.use(session({
+    secret: process.env.SESSION_SECRET_KEY, // 🔒 Change this to something secure in production
+    resave: false,
+    saveUninitialized: false,
+    cookie:{
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true, //to prevent cross scripting attacks
+    }
+}));
+
+// const allowedOrigins = ["http://localhost:3000", "http://localhost:3001"];
+
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true,
+// }));
+
 
 // app.get("/addHoldings", (req, res)=>{
 //     let tempHoldings = [
@@ -190,6 +233,7 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 //     res.send('Done');
 // })
 
+
 app.get('/',(req,res)=>{
     res.send("Hello");
 })
@@ -214,30 +258,20 @@ app.post("/newOrder", async(req, res)=>{
 
     newOrder.save();
     res.send("Order Saved");
+});
+
+app.get('/allOrders', async(req, res)=>{
+    let allOrders = await OrdersModel.find({});
+    res.json(allOrders);
 })
 
-app.post("/signup",async(req, res)=>{
-    console.log(req.body);
-    let newUser = new UsersModel({
-        email: req.body.email,
-        username: req.body.username,
-        password: req.body.password,
-    });
-
-    await newUser.save();
-    res.send("NewUser Created");
+app.get('/allUsers', async(req, res)=>{
+  let allUsers = await UsersModel.find({});
+  res.json(allUsers);
 })
 
-app.post("/login",async (req, res)=>{
-    console.log(req.body);
-
-    let User = await UsersModel.find({$and:[{username: req.body.username},{password: req.body.password}]});
-
-    if(User){
-        console.log("User Exists");
-    }
-})
-
+//Authentication
+app.use("/",AuthRoute);
 
 app.listen(PORT,()=>{
     console.log("App Started");
