@@ -6,7 +6,7 @@ const Orders = () => {
   const [allOrders, setallOrders] = useState([]);
   const [ordersExist, setordersExist] = useState(false);
   useEffect(() => {
-    axios.get(`${process.env.BACKEND_URL}/allOrders`).then((res) => {
+    axios.get("https://zerodha-clone-backend-2y8c.onrender.com/allOrders").then((res) => {
       console.log(res.data);
       setallOrders(res.data);
       setordersExist(true);
