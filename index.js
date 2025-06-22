@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin:  "https://grand-moxie-174ee5.netlify.app",
+  origin:  ["https://zerodha-clone-dashboard-9fsh.netlify.app","https://zerodha-clone-174ee5.netlify.app","http://localhost:3000","http://localhost:3001"],
   credentials: true,
 }));
 
