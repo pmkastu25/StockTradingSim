@@ -6,7 +6,7 @@ const Orders = () => {
   const [allOrders, setallOrders] = useState([]);
   const [ordersExist, setordersExist] = useState(false);
   useEffect(() => {
-    axios.get("http://localhost:3005/allOrders").then((res) => {
+    axios.get(`${process.env.BACKEND_URL}/allOrders`).then((res) => {
       console.log(res.data);
       setallOrders(res.data);
       setordersExist(true);
