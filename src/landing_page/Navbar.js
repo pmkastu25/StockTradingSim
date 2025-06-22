@@ -104,6 +104,12 @@ function Navbar() {
                   Support
                 </Link>
               </li>
+              <hr/>
+              <li>
+                <Link to="https://zerodha-clone-dashboard-9fsh.netlify.app/">
+                <img src="logo.png" alt="KITE logo" style={{width:"25px", height:"16px"}}/><span>&nbsp;&nbsp;&nbsp;Kite</span>
+                </Link>
+              </li>
             </ul>
           </form>
         </div>
