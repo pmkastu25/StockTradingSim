@@ -29,7 +29,7 @@ module.exports.Signup = async (req, res, next) => {
     console.log("Generated Token:", token);
     res.cookie("token", token, {
   httpOnly: true,              // secure from client-side JS
-  sameSite: "Lax",             // or "None" if using HTTPS and cross-domain
+  sameSite: "None",             // or "None" if using HTTPS and cross-domain
   secure: true,               // set to true in production with HTTPS
   maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
 });
@@ -64,7 +64,7 @@ module.exports.Login = async(req, res, next)=>{
     const token = createSecretToken(User._id);
      res.cookie("token", token, {
   httpOnly: true,              // secure from client-side JS
-  sameSite: "Lax",             // or "None" if using HTTPS and cross-domain
+  sameSite: "None",             // or "None" if using HTTPS and cross-domain
   secure: true,               // set to true in production with HTTPS
   maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
 });
@@ -100,7 +100,7 @@ module.exports.verifyUser = (req, res)=>{
 module.exports.logoutUser = (req, res) =>{
   res.clearCookie("token", {
     httpOnly: true,
-    sameSite: "Lax",
+    sameSite: "None",
     secure: true, // true in production with HTTPS
   });
   return res.json({ success: true, message: "Logged out" });
